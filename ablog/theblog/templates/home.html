@@ -9,7 +9,7 @@
     Post
     <ul>
     {%for post in object_list%}
-        <li>{{post.title}} - {{post.author.first_name}}
+    <li><a href="{%url 'article-detail' post.pk%}">{{post.title}} </a> - {{post.author.first_name}}
             {{post.author.last_name}}<br/>
         {{post.body}}</li>
     </ul>
