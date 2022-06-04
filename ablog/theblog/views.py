@@ -3,7 +3,7 @@ from .models import Post
 from django.views.generic import ListView, DetailView
 
 # def home(request):
-#     return render(request, 'home.html',{})
+#     return render(request, 'home.html',{}) -> old method
 
 class HomeView(ListView):
     model = Post
