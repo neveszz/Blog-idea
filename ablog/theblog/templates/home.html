@@ -6,7 +6,14 @@
 </head>
 <body>
 <p>
-    hello world
+    Post
+    <ul>
+    {%for post in object_list%}
+        <li>{{post.title}} - {{post.author.first_name}}
+            {{post.author.last_name}}<br/>
+        {{post.body}}</li>
+    </ul>
+    {%endfor%}
 </p>
 </body>
 </html>
