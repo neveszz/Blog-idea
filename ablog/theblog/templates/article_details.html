@@ -4,7 +4,7 @@
 {% block content %}
 
     <h1>{{ post.title }}</h1>
-    <h7>By: {{ post.author.first_name }} {{ post.author.last_name }}</h7> <br/>
+    <h7>By: {{ post.author.first_name }} {{ post.author.last_name }} - <small><a class="nav-link" href="{% url 'update_post' post.pk %}">Edit</a></small></h7>
     <hr>
     <br/>
     {{ post.body}}
