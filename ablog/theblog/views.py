@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.urls import reverse
+
 from .models import Post
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import PostForm, EditForm
 # def home(request):
 #     return render(request, 'home.html',{}) -> old method
@@ -9,7 +11,7 @@ from .forms import PostForm, EditForm
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
-
+    ordering = ['-id']
 
 class ArticleDetailView(DetailView):
     model = Post
@@ -28,3 +30,12 @@ class UpdatePostView(UpdateView):
     form_class = EditForm
     template_name = 'update_post.html'
     # fields = ['title', 'body', 'title_tag']
+
+
+class DeletePostView(DeleteView):
+    model = Post
+    template_name = 'delete_post.html'
+
+    def get_success_url(self):
+        return reverse('home')
+
