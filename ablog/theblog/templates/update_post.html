@@ -2,14 +2,19 @@
 {% block title %} Update a blog post {% endblock %}
 {% block content %}
 
-<h1>Edit post</h1>
-<br>
-<div class="form-group">
-    <form action="" method="POST">
-     {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit" class="btn btn-info">Update</button>
-
-</form>
-</div>
+{% if user.is_authenticated %}
+    <h1>Edit post</h1>
+    <br>
+    <div class="form-group">
+        <form action="" method="POST">
+         {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-info">Update</button>
+         </form>
+    </div>
+{% else %}
+    <h2>You must be logged in to see this page.</h2>
+<a href="{% url 'login'%}">Login</a> <br>
+<a href="{% url 'home' %}"> Back to home page</a>
+{% endif %}
 {% endblock %}

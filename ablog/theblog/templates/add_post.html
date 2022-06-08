@@ -5,15 +5,21 @@ Create a New Blog Post!
 
 {% block content%}
 
+{% if user.is_authenticated %}
+    <h1> Add Post</h1>
+    <br>
+    <div class="form-group">
+        <form action="" method="post">
+         {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-info">Post</button>
 
-<h1> Add Post</h1>
-<br>
-<div class="form-group">
-    <form action="" method="post">
-     {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit" class="btn btn-info">Post</button>
+    </form>
+    </div>
+{% else %}
+    <h2>You must be logged in to see this page.</h2>
+    <a href="{% url 'login'%}">Login</a> <br>
+    <a href="{% url 'home' %}"> Back to home page</a>
+{% endif %}
 
-</form>
-</div>
 {% endblock %}

@@ -1,18 +1,23 @@
 {% extends 'base.html' %}
 {% block title %} Delete post {% endblock %}
 {% block content %}
-    <h1>Delete post</h1>
-<br>
-    <h4>Delete post: {{ post.title }} </h4>
-<br>
-<div class="form-group">
-    <form action="" method="post">
-        {% csrf_token %}
-        <strong>Are you sure?</strong><br><br>
-        <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
+{% if user.is_authenticated %}
+        <h1>Delete post</h1>
+    <br>
+        <h4>Delete post: {{ post.title }} </h4>
+    <br>
+    <div class="form-group">
+        <form action="" method="post">
+            {% csrf_token %}
+            <strong>Are you sure?</strong><br><br>
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
 
-</div>
-
+    </div>
+{% else %}
+    <h2>You must be logged in to see this page.</h2>
+<a href="{% url 'login'%}">Login</a> <br>
+<a href="{% url 'home' %}"> Back to home page</a>
+{% endif %}
 
 {% endblock %}

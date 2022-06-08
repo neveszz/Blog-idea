@@ -5,16 +5,28 @@
    <h1>&nbsp; Posts </h1>
 
     <ul>
-    {% for post in object_list %}
+    {% if user.is_authenticated %}
+        {% for post in object_list %}
     <li>   <div class="table"><a href="{%url 'article-detail' post.pk%}">{{ post.title }} </a> - {{post.author.first_name}}
         {{ post.author.last_name }} <br>
-        {{ post.body }}<br>
+        {{ post.body|truncatewords:35 }}<br>
         <small><a style="display:inline" class="nav-link" href="{% url 'update_post' post.pk %}">Edit</a></small>
         <small><a style="display:inline" class="nav-link" href="{% url 'delete_post' post.pk %}">Delete</a></small><br>
         <small>&emsp;&nbsp;{{ post.post_date }}</small></div>
     </li>
         <br>
     {% endfor %}
+    {% else %}
+        {% for post in object_list %}
+    <li>   <div class="table"><a href="{%url 'article-detail' post.pk%}">{{ post.title }} </a> - {{post.author.first_name}}
+        {{ post.author.last_name }} <br>
+        {{ post.body|truncatewords:35 }}<br>
+        <small>&emsp;&nbsp;{{ post.post_date }}</small></div>
+    </li>
+        <br>
+    {% endfor %}
+    {% endif %}
+
     </ul>
 </p>
 
