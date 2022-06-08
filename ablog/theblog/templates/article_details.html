@@ -4,7 +4,8 @@
 {% block content %}
 
     <h1>{{ post.title }}</h1>
-    <h7>By: {{ post.author.first_name }} {{ post.author.last_name }} </h7>
+    <h7>By: {{ post.author.first_name }} {{ post.author.last_name }} - </h7>
+    <small> {{ post.post_date }}</small>
     <hr>
     {{ post.body}}
     <br><br>

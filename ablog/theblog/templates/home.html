@@ -3,13 +3,15 @@
 
 <p>
    <h1>Posts </h1>
+
     <ul>
     {% for post in object_list %}
-    <li><a href="{%url 'article-detail' post.pk%}">{{post.title}} </a> - {{post.author.first_name}}
-        {{post.author.last_name}} <br>
-        {{post.body}}
+    <li>   <div class="table"><a href="{%url 'article-detail' post.pk%}">{{ post.title }} </a> - {{post.author.first_name}}
+        {{ post.author.last_name }} <br>
+        {{ post.body }}
         <small><a class="nav-link" href="{% url 'update_post' post.pk %}">Edit</a></small>
         <small><a class="nav-link" href="{% url 'delete_post' post.pk %}">Delete</a></small>
+        <small>{{ post.post_date }}</small></div>
     </li>
         <br>
     {% endfor %}
