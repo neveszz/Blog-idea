@@ -7,7 +7,7 @@
     <h7>By: {{ post.author.first_name }} {{ post.author.last_name }} - </h7>
     <small> {{ post.post_date }}</small>
     <hr>
-    {{ post.body}}
+    {{ post.body|safe}}
     <br><br>
     <hr>
 {% if user.is_authenticated %}
