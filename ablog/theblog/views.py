@@ -43,3 +43,7 @@ class DeletePostView(DeleteView):
     def get_success_url(self):
         return reverse('home')
 
+
+def CategoryView(request, catego):
+    category_posts = Post.objects.filter(category=catego).order_by('-post_date')
+    return render(request, 'categories.html', {'catego':catego.title(), 'category_posts':category_posts})
