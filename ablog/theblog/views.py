@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import Post
+from .models import Post, Category
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import PostForm, EditForm
 # def home(request):
@@ -25,7 +25,10 @@ class AddPostView(CreateView):
     template_name = 'add_post.html'
     # fields = '__all__'
 
-
+class AddCategoryView(CreateView):
+    model = Category
+    template_name = 'add_category.html'
+    fields = '__all__'
 class UpdatePostView(UpdateView):
     model = Post
     form_class = EditForm

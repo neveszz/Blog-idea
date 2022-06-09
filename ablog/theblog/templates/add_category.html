@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} Add a new blog category {% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    <h1>Add a category</h1>
+    <br><br>
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-secondary" type="submit">Add!</button>
+        </form>
+    </div>
+{% else %}
+    <h1>You're not allowed to see this page</h1>
+    <h3>Login to see the page</h3>
+    <a style="display:inline" href="{% url 'home' %}">Back to main page</a>
+    <a href="{% url 'login' %}">Login</a>
+
+{% endif %}
+
+{% endblock %}
