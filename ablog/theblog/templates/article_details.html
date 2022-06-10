@@ -2,23 +2,23 @@
 
 {% block title %} {{ post.title }} {% endblock %}
 {% block content %}
-
     <h1>{{ post.title }}</h1>
+
     <h7>By: {{ post.author.first_name }} {{ post.author.last_name }} - </h7>
     <small> {{ post.post_date }}</small>
     <hr>
     {{ post.body|safe}}
     <br><br>
     <hr>
-{% if user.is_authenticated %}
-    <small><a style="display:inline" class="nav-link" href="{% url 'update_post' post.pk %}">Edit</a>
-    <a href="{% url 'delete_post' post.pk %}">Delete</a></small>
+    {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+            <small><a style="display:inline" class="nav-link" href="{% url 'update_post' post.pk %}">Edit</a>
+            <a href="{% url 'delete_post' post.pk %}">Delete</a></small>
+            <br><br>
 
-    <br><br>
-
+    {% endif %}
+        {% endif %}
     <a href="{% url 'home' %}" class="btn btn-info">Back to main page</a>
-{% endif %}
-
 {% endblock %}
 
 

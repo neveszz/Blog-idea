@@ -3,18 +3,24 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-    <h1>Edit post</h1>
-    <br>
-    <div class="form-group">
-        <form action="" method="POST">
-         {% csrf_token %}
-            {{form.as_p}}
-            <button type="submit" class="btn btn-info">Update</button>
-         </form>
-    </div>
+    {% if user.id == post.author.id %}
+        <h1>Edit post</h1>
+        <br>
+        <div class="form-group">
+            <form action="" method="POST">
+             {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-info">Update</button>
+             </form>
+        </div>
+    {% else %}
+        <h1>This post isn't yours to edit</h1>
+        <a href="{% url 'home' %}">Back to main page</a>
+    {% endif %}
 {% else %}
     <h2>You must be logged in to see this page.</h2>
-<a href="{% url 'login'%}">Login</a> <br>
+<a href="{% url 'login'%}"> Login</a> <br>
 <a href="{% url 'home' %}"> Back to home page</a>
 {% endif %}
+
 {% endblock %}

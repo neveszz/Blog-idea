@@ -10,8 +10,10 @@
         <li>   <div class="table"><a href="{%url 'article-detail' post.pk%}">{{ post.title }}</a> - <a href="{% url 'category' post.category %}"> {{post.category }} </a> - {{post.author.first_name}}
         {{ post.author.last_name }} <br>
         {{ post.body|truncatewords:35 }}<br>
-        <small><a style="display:inline" class="nav-link" href="{% url 'update_post' post.pk %}">Edit</a></small>
-        <small><a style="display:inline" class="nav-link" href="{% url 'delete_post' post.pk %}">Delete</a></small><br>
+            {% if user.id == post.author.id %}
+                <small><a style="display:inline" class="nav-link" href="{% url 'update_post' post.pk %}">Edit</a></small>
+                <small><a style="display:inline" class="nav-link" href="{% url 'delete_post' post.pk %}">Delete</a></small><br>
+            {% endif %}
         <small>&emsp;&nbsp;{{ post.post_date }}</small></div>
     </li>
         <br>
