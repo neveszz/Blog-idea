@@ -24,6 +24,26 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      {% if cat_menu %}
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Categories
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+          {{% for item in cat_menu %}
+          <a class="dropdown-item" href="{% url 'category' item %}"> {{ item }}</a>
+          {%endfor%}
+
+        </div>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'category_list' %}">Categories list</a>
+      </li>
+      {% endif %}
+
         {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'add_post' %}">Create a new post</a>
@@ -37,13 +57,16 @@
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
           </li>
         {% else %}
+
         <li class="nav-item">
           <a class="nav-link" href="{% url 'login' %}">Login</a>
         </li>
 
-         <li class="nav-item">
+        <li class="nav-item">
           <a class="nav-link" href="{% url 'register' %}">Register here</a>
         </li>
+
+
 
         {% endif %}
       </ul>
