@@ -18,6 +18,13 @@
 
     {% endif %}
         {% endif %}
+
+<hr><br>
+<form action="{% url 'like_post' post.pk %}" method="post">
+    {% csrf_token %}
+    <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-primary btn-sm" >Like</button> {{ total_likes }} Likes
+</form>
+<br>
     <a href="{% url 'home' %}" class="btn btn-info">Back to main page</a>
 {% endblock %}
 

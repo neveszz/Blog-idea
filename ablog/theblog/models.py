@@ -21,10 +21,14 @@ class Post(models.Model):
     title_tag = models.CharField(max_length=255, default=title)
     post_date = models.DateField(auto_now_add=True)
     category = models.CharField(max_length=255, default='uncategorized')
+    likes = models.ManyToManyField(User, related_name='blog_post')
 
     def __str__(self):
         return self.title + ' | ' + str(self.author)
 
     def get_absolute_url(self):
         return reverse('article-detail', args=(str(self.pk)))
+
+    def total_likes(self):
+        return self.likes.count()
 
