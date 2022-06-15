@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 from datetime import date, datetime
 from django.urls import reverse
-
+from ckeditor.fields import RichTextField
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -17,7 +17,8 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.TextField()
+    # body = models.TextField()
+    body = RichTextField(blank=True, null=True)
     title_tag = models.CharField(max_length=255, default=title)
     post_date = models.DateField(auto_now_add=True)
     category = models.CharField(max_length=255, default='uncategorized')
@@ -27,7 +28,7 @@ class Post(models.Model):
         return self.title + ' | ' + str(self.author)
 
     def get_absolute_url(self):
-        return reverse('article-detail', args=(str(self.pk)))
+        return reverse('article-detail', args=[(str(self.pk))])
 
     def total_likes(self):
         return self.likes.count()
