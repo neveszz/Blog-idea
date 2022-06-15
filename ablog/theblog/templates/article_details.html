@@ -7,8 +7,11 @@
     <h7>By: {{ post.author.first_name }} {{ post.author.last_name }} - </h7>
     <small> {{ post.post_date }}</small>
     <hr>
-    {{ post.body|safe}}
-    <br><br>
+    {% if post.header_image %}
+        <img src="{{ post.header_image.url }}"><br><br>
+        <br><br>
+    {% endif %}
+    {{ post.body|safe }}
     <hr>
     {% if user.is_authenticated %}
         {% if user.id == post.author.id %}
