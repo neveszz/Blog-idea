@@ -11,10 +11,11 @@ for item in choices:
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title','title_tag','author', 'category','body')
+        fields = ('title','title_tag','author', 'category','summary','body')
 
         widgets = {
-                'title':forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Insert title here'}),
+            'title':forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Insert title here'}),
+            'summary': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Here goes the summary of the post'}),
             'body': forms.Textarea(attrs={'class': 'form-control', 'placeholder':'Here goes the body of the post'}),
             'author': forms.Select(attrs={'class': 'form-control'}),
             'category':forms.Select(choices=choice_list, attrs={'class':'form-control'}),
@@ -24,10 +25,11 @@ class PostForm(forms.ModelForm):
 class EditForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'body', 'title_tag')
+        fields = ('title','summary', 'body', 'title_tag')
 
         widgets = {
             'title':forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Insert title here'}),
+            'summary': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Here goes the summary of the post'}),
             'body': forms.Textarea(attrs={'class': 'form-control', 'placeholder':'Here goes the body of the post'}),
             # 'author': forms.Select(attrs={'class': 'form-control'}),
             'title_tag': forms.TextInput(attrs={'class': 'form-control'})
