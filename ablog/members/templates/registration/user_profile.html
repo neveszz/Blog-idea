@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>User profile</h1>
+
+<div class="card" style="width: 18rem;">
+    {% if page_user.profile_pic %}
+        <img src="{{ page_user.profile_pic.url }}" alt="" width=130 height=130 class="rounded-circle">
+    {% else %}
+        <img src="{% static 'theblog/images/TikTok.jpg' %}" alt="" width=130 height=130 class="rounded-circle">
+    {% endif %}
+  <div class="card-body">
+      {% if page_user.profile %}
+            <h5 class="card-title"><a href="{% url 'show_profile_page' post.author.profile.id %}">
+        {{ page_user.first_name}} {{ page_user.last_name }}</a></h5>
+      {% else %}
+            <h5 class="card-title">{{ page_user.user.first_name}} {{ page_user.user.last_name }}</h5>
+      {% endif %}
+    <p class="card-text">{{ page_user.bio }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+
+      {% if page_user.website_url %}
+          <li class="list-group-item"><a href="{{ page_user.website_url }}">Site</a></li>
+      {% endif %}
+
+      {% if page_user.instagram_url %}
+           <li class="list-group-item"><a href="{{ page_user.instagram_url }}">Instagram</a></li>
+      {% endif %}
+
+      {% if page_user.facebook_url %}
+           <li class="list-group-item"><a href="{{ page_user.facebook_url }}">Facebook</a></li>
+      {% endif %}
+
+      {% if page_user.twitter_url %}
+           <li class="list-group-item"><a href="{{ page_user.twitter_url }}">Twitter</a></li>
+      {% endif %}
+
+      {% if page_user.github_url %}
+           <li class="list-group-item"><a href="{{ page_user.github_url }}">GitHub</a></li>
+      {% endif %}
+  </ul>
+</div>
+
+
+<br>
+<br>
+    <a href="{% url 'home' %}" class="btn btn-info">Back to main page</a>
+
+{% endblock %}

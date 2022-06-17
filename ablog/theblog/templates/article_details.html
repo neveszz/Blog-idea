@@ -12,7 +12,7 @@
         <br><br>
     {% endif %}
     {{ post.body|safe }}
-    <hr>
+
     {% if user.is_authenticated %}
         {% if user.id == post.author.id %}
             <small><a style="display:inline" class="nav-link" href="{% url 'update_post' post.pk %}">Edit</a>
@@ -46,7 +46,12 @@
         <img src="{% static 'theblog/images/TikTok.jpg' %}" alt="" width=130 height=130 class="rounded-circle">
     {% endif %}
   <div class="card-body">
-    <h5 class="card-title">{{ post.author.first_name}} {{ post.author.last_name }}</h5>
+      {% if post.author.profile %}
+            <h5 class="card-title"><a href="{% url 'show_profile_page' post.author.profile.id %}">
+        {{ post.author.first_name}} {{ post.author.last_name }}</a></h5>
+      {% else %}
+            <h5 class="card-title">{{ post.author.first_name}} {{ post.author.last_name }}</h5>
+      {% endif %}
     <p class="card-text">{{ post.author.profile.bio }}</p>
   </div>
   <ul class="list-group list-group-flush">
