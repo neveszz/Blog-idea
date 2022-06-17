@@ -37,7 +37,40 @@
     {% endif %}
         <br>{{ total_likes }} Likes
     </form>
+<br>
 
+<div class="card" style="width: 18rem;">
+<img src="{{ post.author.profile.profile_pic.url }}" alt="" width=130 height=130 class="rounded-circle">
+  <div class="card-body">
+    <h5 class="card-title">{{ post.author.first_name}} {{ post.author.last_name }}</h5>
+    <p class="card-text">{{ post.author.profile.bio }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+
+      {% if post.author.profile.website_url %}
+          <li class="list-group-item"><a href="{{ post.author.profile.website_url }}">Site</a></li>
+      {% endif %}
+
+      {% if post.author.profile.instagram_url %}
+           <li class="list-group-item"><a href="{{ post.author.profile.instagram_url }}">Instagram</a></li>
+      {% endif %}
+
+      {% if post.author.profile.facebook_url %}
+           <li class="list-group-item"><a href="{{ post.author.profile.facebook_url }}">Facebook</a></li>
+      {% endif %}
+
+      {% if post.author.profile.twitter_url %}
+           <li class="list-group-item"><a href="{{ post.author.profile.twitter_url }}">Twitter</a></li>
+      {% endif %}
+
+      {% if post.author.profile.github_url %}
+           <li class="list-group-item"><a href="{{ post.author.profile.github_url }}">GitHub</a></li>
+      {% endif %}
+  </ul>
+</div>
+
+
+<br>
 <br>
     <a href="{% url 'home' %}" class="btn btn-info">Back to main page</a>
 {% endblock %}
