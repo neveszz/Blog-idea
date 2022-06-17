@@ -1,5 +1,5 @@
-{% extends 'base.html'%}
-
+{% extends 'base.html' %}
+{% load static %}
 {% block title %} {{ post.title }} {% endblock %}
 {% block content %}
     <h1>{{ post.title }}</h1>
@@ -40,7 +40,11 @@
 <br>
 
 <div class="card" style="width: 18rem;">
-<img src="{{ post.author.profile.profile_pic.url }}" alt="" width=130 height=130 class="rounded-circle">
+    {% if post.author.profile.profile_pic %}
+        <img src="{{ post.author.profile.profile_pic.url }}" alt="" width=130 height=130 class="rounded-circle">
+    {% else %}
+        <img src="{% static 'theblog/images/TikTok.jpg' %}" alt="" width=130 height=130 class="rounded-circle">
+    {% endif %}
   <div class="card-body">
     <h5 class="card-title">{{ post.author.first_name}} {{ post.author.last_name }}</h5>
     <p class="card-text">{{ post.author.profile.bio }}</p>
