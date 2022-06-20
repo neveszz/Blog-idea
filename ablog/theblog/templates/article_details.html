@@ -77,7 +77,21 @@
       {% endif %}
   </ul>
 </div>
+<h2>Comments</h2><br>
+<hr>
+{% if not post.comments.all %}
+    No comments yet... <a href="#">Add one</a>
+{% else %}
+    {% for comment in post.comments.all %}
+        <strong>
+            {{ comment.name }} -
+            {{ comment.date_added }}
+        </strong><br>
+        {{ comment.body}}
+<hr>
+    {% endfor%}
 
+{% endif %}
 
 <br>
 <br>
