@@ -80,19 +80,21 @@
 <h2>Comments</h2><br>
 <hr>
 {% if not post.comments.all %}
-    No comments yet... <a href="#">Add one</a>
+    No comments yet...
 {% else %}
+<a href="{% url 'add_comment' post.pk %}">Add a comment</a><br><br>
     {% for comment in post.comments.all %}
         <strong>
             {{ comment.name }} -
             {{ comment.date_added }}
         </strong><br>
         {{ comment.body}}
+
 <hr>
     {% endfor%}
 
 {% endif %}
-
+<br>    <a href="{% url 'add_comment' post.pk %}">Add a comment</a><br>
 <br>
 <br>
     <a href="{% url 'home' %}" class="btn btn-info">Back to main page</a>
