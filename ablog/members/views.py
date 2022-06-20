@@ -1,3 +1,5 @@
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
@@ -39,3 +41,7 @@ class EditProfilePageView(generic.UpdateView):
     success_url = 'home'
     fields = ['bio', 'profile_pic', 'website_url', 'facebook_url', 'twitter_url', 'instagram_url', 'github_url']
 
+
+class PasswordsChangeView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('home')
