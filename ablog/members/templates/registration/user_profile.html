@@ -3,7 +3,14 @@
 {% block content %}
 
 <h1>User profile</h1>
+<style>
+    .profile-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+</style>
 
+      <div class="profile-container">
 <div class="card" style="width: 18rem;">
     {% if page_user.profile_pic %}
         <img src="{{ page_user.profile_pic.url }}" alt="" width=130 height=130 class="rounded-circle">
@@ -20,6 +27,7 @@
     <p class="card-text">{{ page_user.bio }}</p>
   </div>
   <ul class="list-group list-group-flush">
+
 
       {% if page_user.website_url %}
           <li class="list-group-item"><a href="{{ page_user.website_url }}">Site</a></li>
@@ -42,6 +50,20 @@
       {% endif %}
   </ul>
 </div>
+
+          <ul>
+              {% for post in posted %}
+              {% if post.author == page_user.user %}
+              <li>
+                  - <a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> <br>
+                  {{ post.summary }}<br><br>
+              </li>
+              {% endif %}
+              {% endfor %}
+          </ul>
+
+      </div>
+
 
 <br>
 <br>

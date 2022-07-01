@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView
 
 from .forms import SignUpForm, EditProfileForm
-from theblog.models import Profile
+from theblog.models import Profile, Post
 
 
 class UserRegistrationView(generic.CreateView):
@@ -30,10 +30,15 @@ class ShowProfilePageView(DetailView):
 
     def get_context_data(self, *args, **kwargs):
         users = Profile.objects.all()
+        # posted = Post.objects.filter(author_id=self.kwargs['pk'])
+        posted = Post.objects.all()
         context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
-        page_user = get_object_or_404(Profile, id= self.kwargs['pk'])
-        context["page_user"] = page_user
+        page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
+        # context["page_user"] = page_user
+        context = {'page_user':page_user, 'posted':posted}
         return context
+
+
 
 class EditProfilePageView(generic.UpdateView):
     model = Profile
